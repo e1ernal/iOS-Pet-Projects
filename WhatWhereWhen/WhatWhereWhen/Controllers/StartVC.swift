@@ -10,15 +10,14 @@ import UIKit
 
 class StartVC: UIViewController {
     
-    var characters = ["Результат 1: 10/15", "Результат 2: 2/15", "Результат 3: 7/15", "Результат 4: 6/15", "Результат 5: 8/15", "Результат 6: 10/15", "Результат 7: 11/15", "Результат 8: 15/15", "Результат 9: 9/15", "Результат 1: 10/15"]
+    /* CoreData update */
+    var scores = [1, 4, 5, 13, 12, 7, 3]
     
     lazy var titleLbl = TitleLabel()
     lazy var startBtn = RegularButton()
-//    lazy var scoreTable = UITableView()
     lazy var scoreTable: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .black
-        tableView.sizeToFit()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -67,7 +66,6 @@ extension StartVC {
         startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        /* Remove later */ scoreTable.translatesAutoresizingMaskIntoConstraints = false
         scoreTable.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
         scoreTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
         scoreTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
@@ -89,18 +87,35 @@ extension StartVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func setupTableView() {
-        scoreTable.register(UITableViewCell.self, forCellReuseIdentifier: "scoreCell")
+        scoreTable.register(CustomTableViewCell.self, forCellReuseIdentifier: "scoreCell")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
+        return scores.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = scoreTable.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath)
-        cell.textLabel?.text = characters[indexPath.row]
-        /* Remove later */ cell.backgroundColor = .darkGray
-        /* Remove later */ cell.textLabel?.textColor = .white
+        let cell = scoreTable.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
+        
+        let score = scores[indexPath.row]
+        let maxScore = scores.count
+        let attempt = indexPath.row + 1
+        
+        cell.attemptLabel.text = "Попытка №\(attempt)"
+        cell.scoreLabel.text = "Результат: \(score) из \(maxScore)"
+        
+        switch indexPath.row {
+            case 0:
+                cell.rewardLabel.text = Reward.first.rawValue
+                cell.backgroundColor = .systemGreen.withAlphaComponent(0.7)
+            case 1:
+                cell.rewardLabel.text = Reward.second.rawValue
+                cell.backgroundColor = .systemGreen.withAlphaComponent(0.5)
+            case 2:
+                cell.rewardLabel.text = Reward.third.rawValue
+                cell.backgroundColor = .systemGreen.withAlphaComponent(0.3)
+            default: cell.rewardLabel.text = Reward.other.rawValue
+        }
         return cell
     }
 }

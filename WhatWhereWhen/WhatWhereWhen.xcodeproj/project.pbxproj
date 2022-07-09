@@ -17,7 +17,7 @@
 		ED7C68052878D7FD006D5882 /* RegularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68042878D7FD006D5882 /* RegularButton.swift */; };
 		ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68062878E919006D5882 /* CustomLabels.swift */; };
 		ED7C68092878ED6F006D5882 /* QuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68082878ED6F006D5882 /* QuestionsVC.swift */; };
-		ED7C680B2878F256006D5882 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C680A2878F256006D5882 /* CustomTableView.swift */; };
+		ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		ED7C68042878D7FD006D5882 /* RegularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularButton.swift; sourceTree = "<group>"; };
 		ED7C68062878E919006D5882 /* CustomLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabels.swift; sourceTree = "<group>"; };
 		ED7C68082878ED6F006D5882 /* QuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsVC.swift; sourceTree = "<group>"; };
-		ED7C680A2878F256006D5882 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
+		ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 				ED7C68022878D3B2006D5882 /* UISettings.swift */,
 				ED7C68042878D7FD006D5882 /* RegularButton.swift */,
 				ED7C68062878E919006D5882 /* CustomLabels.swift */,
-				ED7C680A2878F256006D5882 /* CustomTableView.swift */,
+				ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 				ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */,
 				ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */,
 				ED7C67EA2878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld in Sources */,
-				ED7C680B2878F256006D5882 /* CustomTableView.swift in Sources */,
+				ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */,
 				ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */,
 				ED7C68052878D7FD006D5882 /* RegularButton.swift in Sources */,
 				ED7C67F82878CF4F006D5882 /* StartVC.swift in Sources */,

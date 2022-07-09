@@ -47,3 +47,16 @@ class RegularLabel: CustomLabels {
         self.font = UIFont.systemFont(ofSize: TextSize.regular.rawValue, weight: TextWeight.regular.getWeight())
     }
 }
+
+class LightLabel: CustomLabels {
+    override func setFont() {
+        self.font = UIFont.systemFont(ofSize: TextSize.small.rawValue, weight: TextWeight.light.getWeight())
+    }
+}
+
+class RewardLabel: CustomLabels {
+    override func setFont() {
+        self.font = UIFont.systemFont(ofSize: TextSize.regular.rawValue, weight: TextWeight.regular.getWeight())
+        self.text = Reward.other.rawValue
+    }
+}
