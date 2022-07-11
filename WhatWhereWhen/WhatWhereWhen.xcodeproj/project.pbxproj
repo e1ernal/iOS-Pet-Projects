@@ -20,6 +20,7 @@
 		ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */; };
 		EDC0209E287B8872002FD4AE /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC0209D287B8872002FD4AE /* questions.json */; };
 		EDC020A1287B920A002FD4AE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A0287B920A002FD4AE /* Model.swift */; };
+		EDC020A3287BAC06002FD4AE /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A2287BAC06002FD4AE /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EDC0209D287B8872002FD4AE /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
 		EDC020A0287B920A002FD4AE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EDC020A2287BAC06002FD4AE /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				EDC020A0287B920A002FD4AE /* Model.swift */,
+				EDC020A2287BAC06002FD4AE /* Network.swift */,
 				ED7C67E82878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld */,
 			);
 			path = Model;
@@ -188,6 +191,7 @@
 				ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */,
 				ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */,
 				ED7C67EA2878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld in Sources */,
+				EDC020A3287BAC06002FD4AE /* Network.swift in Sources */,
 				EDC020A1287B920A002FD4AE /* Model.swift in Sources */,
 				ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */,
 				ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */,

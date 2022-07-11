@@ -29,8 +29,9 @@ class QuestionsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         /*JSON request*/
-        loadCoreData()
+        requestNetData()
         makeUI()
     }
 }
@@ -38,6 +39,8 @@ class QuestionsVC: UIViewController {
 extension QuestionsVC {
     
     func makeUI() {
+        guard !questions.isEmpty else { return }
+        
         let randAnswer = [0, 1, 2].shuffled()
         let answers = questions[Int(currentQuestion)].answers
         let constraint = Constraints.basic.rawValue
@@ -102,22 +105,20 @@ extension QuestionsVC {
 }
 
 extension QuestionsVC {
-    func loadCoreData() {
-        let q1 = Question(id: 1,
-                          title: "Плакат",
-                          question: "Кого решили изобразить на плакате против расизма, потому что они одновременно и белые, и чёрные, и азиаты?",
-                          answers: ["Панды",
-                                    "Шахматы",
-                                    "Индусы"],
-                          answer: "Панды")
-        let q2 = Question(id: 2,
-                          title: "Остатки образования",
-                          question: "Они придуманы для того, чтобы мы спокойнее относились к случайным и бесполезным остаткам от полученного нами образования",
-                          answers: ["Телевизионные викторины",
-                                    "Кроссворды",
-                                    "Собеседования"],
-                          answer: "Телевизионные викторины")
-        questions.append(q1)
-        questions.append(q2)
+    func requestNetData() {
+        let net = Network()
+        guard let file = net.readLocalFile(forName: "questions") else { return }
+        questions = net.parse(jsonData: file)
+        
+//        let urlString = "https://api.jsonbin.io/v3/b/62cb813ef023111c70717c3a"
+//
+//        net.loadJson(fromURLString: urlString) { (result) in
+//            switch result {
+//            case .success(let data):
+//                self.questions = net.parse(jsonData: data)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
 }
