@@ -26,16 +26,16 @@ class Network {
             let decodedData = try JSONDecoder().decode([Question].self, from: jsonData)
             
             decodedData.forEach {
-                print("Question: \($0.id)")
-                print("Title: \($0.title)")
+                print("№       : \($0.id)")
+                print("Title   : \($0.title)")
                 print("Question: \($0.question)")
-                print("Answer: \($0.answer)")
+                print("Answer  : \($0.answer)")
                 print("===================================")
             }
             return decodedData
             
         } catch {
-            print("decode error")
+            print("Decode error")
         }
         return [Question]()
     }

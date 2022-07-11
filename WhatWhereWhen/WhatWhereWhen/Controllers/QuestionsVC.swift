@@ -31,7 +31,7 @@ class QuestionsVC: UIViewController {
         super.viewDidLoad()
         
         /*JSON request*/
-        requestNetData()
+        requestNetworkData()
         makeUI()
     }
 }
@@ -105,7 +105,7 @@ extension QuestionsVC {
 }
 
 extension QuestionsVC {
-    func requestNetData() {
+    func requestNetworkData() {
         let net = Network()
         guard let file = net.readLocalFile(forName: "questions") else { return }
         questions = net.parse(jsonData: file)
