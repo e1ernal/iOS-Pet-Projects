@@ -10,31 +10,25 @@ import UIKit
 
 class StartVC: UIViewController {
     
-    /* CoreData update */
-    var scores = [1, 4, 5, 13, 12, 7, 3]
-    
     lazy var titleLbl = TitleLabel()
     lazy var startBtn = RegularButton()
-    lazy var scoreTbl: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .black
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
+    lazy var scoreBtn = FurtherButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
-        setupTableView()
-        startBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        scoreTbl.delegate = self
-        scoreTbl.dataSource = self
+        startBtn.addTarget(self, action: #selector(showQuestions), for: .touchUpInside)
+        scoreBtn.addTarget(self, action: #selector(showScore), for: .touchUpInside)
     }
     
-    @objc func buttonAction() {
+    @objc func showQuestions() {
         let nextVC: QuestionsVC = QuestionsVC()
-        nextVC.modalPresentationStyle = .fullScreen
-        self.present(nextVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func showScore() {
+        let nextVC: ScoreVC = ScoreVC()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -45,14 +39,15 @@ extension StartVC {
                                  15 вопросов из игры
                                  <Что? Где? Когда?>
                                  """
-        let buttonTitle: String = "Начать играть"
+        let startGameTitle: String = "Начать играть"
+        let showScoreTitle: String = "Показать результаты"
         
         self.view.backgroundColor = .black
         let constraint = Constraints.basic.rawValue
         
         self.view.addSubview(titleLbl)
         self.view.addSubview(startBtn)
-        self.view.addSubview(scoreTbl)
+        self.view.addSubview(scoreBtn)
         
         titleLbl.text = labelTitle
         titleLbl.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: constraint).isActive = true
@@ -60,62 +55,15 @@ extension StartVC {
         titleLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         titleLbl.bottomAnchor.constraint(equalTo: startBtn.topAnchor, constant: -constraint).isActive = true
         
-        startBtn.setTitle(buttonTitle, for: .normal)
+        startBtn.setTitle(startGameTitle, for: .normal)
         startBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
         startBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        scoreTbl.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
-        scoreTbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
-        scoreTbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
-        scoreTbl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
-    }
-}
-
-extension StartVC: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = .black
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white
-        header.textLabel?.font = UIFont.systemFont(ofSize: 15)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Результаты"
-    }
-    
-    func setupTableView() {
-        scoreTbl.register(CustomTableViewCell.self, forCellReuseIdentifier: "scoreCell")
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scores.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = scoreTbl.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
-        
-        let score = scores[indexPath.row]
-        let maxScore = scores.count
-        let attempt = indexPath.row + 1
-        
-        cell.attemptLabel.text = "Попытка №\(attempt)"
-        cell.scoreLabel.text = "Результат: \(score) из \(maxScore)"
-        
-        switch indexPath.row {
-            case 0:
-                cell.rewardLabel.text = Reward.first.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.7)
-            case 1:
-                cell.rewardLabel.text = Reward.second.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.5)
-            case 2:
-                cell.rewardLabel.text = Reward.third.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.3)
-            default: cell.rewardLabel.text = Reward.other.rawValue
-        }
-        return cell
+        scoreBtn.setTitle(showScoreTitle, for: .normal)
+        scoreBtn.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
+        scoreBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
+        scoreBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
     }
 }

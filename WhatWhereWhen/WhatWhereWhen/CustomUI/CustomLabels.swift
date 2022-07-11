@@ -38,7 +38,7 @@ class TitleLabel: CustomLabels {
 
 class SubtitleLabel: CustomLabels {
     override func setFont() {
-        self.font = UIFont.systemFont(ofSize: TextSize.subtitle.rawValue, weight: TextWeight.subtitle.getWeight())
+        self.font = UIFont.systemFont(ofSize: TextSize.subtitle.rawValue, weight: TextWeight.regular.getWeight())
     }
 }
 

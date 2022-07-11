@@ -30,7 +30,7 @@ class Network {
                 print("Title   : \($0.title)")
                 print("Question: \($0.question)")
                 print("Answer  : \($0.answer)")
-                print("===================================")
+                print("--------------------------")
             }
             return decodedData
             
@@ -52,7 +52,6 @@ class Network {
                     completion(.success(data))
                 }
             }
-            
             urlSession.resume()
         }
     }

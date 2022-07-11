@@ -29,23 +29,21 @@ class CustomButton: UIButton {
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.size.height / 2.0
         self.translatesAutoresizingMaskIntoConstraints = false
-        setColor()
+        setDefaultColor()
     }
     
-    func setColor() {}
+    func setDefaultColor() {}
 }
 
 class RegularButton: CustomButton {
-    
-    override func setColor() {
+    override func setDefaultColor() {
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = .systemBlue
     }
 }
 
-class HintButton: CustomButton {
-    
-    override func setColor() {
+class FurtherButton: CustomButton {
+    override func setDefaultColor() {
         self.setTitleColor(UIColor.systemBlue, for: .normal)
         self.backgroundColor = .systemGray6
     }

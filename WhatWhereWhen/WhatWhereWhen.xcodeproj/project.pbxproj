@@ -21,6 +21,8 @@
 		EDC0209E287B8872002FD4AE /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC0209D287B8872002FD4AE /* questions.json */; };
 		EDC020A1287B920A002FD4AE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A0287B920A002FD4AE /* Model.swift */; };
 		EDC020A3287BAC06002FD4AE /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A2287BAC06002FD4AE /* Network.swift */; };
+		EDC020A5287C4334002FD4AE /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A4287C4334002FD4AE /* Game.swift */; };
+		EDC020A8287C65B2002FD4AE /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A7287C65B2002FD4AE /* ScoreVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		EDC0209D287B8872002FD4AE /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
 		EDC020A0287B920A002FD4AE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EDC020A2287BAC06002FD4AE /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		EDC020A4287C4334002FD4AE /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		EDC020A7287C65B2002FD4AE /* ScoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 			children = (
 				ED7C67F72878CF4F006D5882 /* StartVC.swift */,
 				ED7C68082878ED6F006D5882 /* QuestionsVC.swift */,
+				EDC020A7287C65B2002FD4AE /* ScoreVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 			children = (
 				EDC020A0287B920A002FD4AE /* Model.swift */,
 				EDC020A2287BAC06002FD4AE /* Network.swift */,
+				EDC020A4287C4334002FD4AE /* Game.swift */,
 				ED7C67E82878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld */,
 			);
 			path = Model;
@@ -191,8 +197,10 @@
 				ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */,
 				ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */,
 				ED7C67EA2878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld in Sources */,
+				EDC020A8287C65B2002FD4AE /* ScoreVC.swift in Sources */,
 				EDC020A3287BAC06002FD4AE /* Network.swift in Sources */,
 				EDC020A1287B920A002FD4AE /* Model.swift in Sources */,
+				EDC020A5287C4334002FD4AE /* Game.swift in Sources */,
 				ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */,
 				ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */,
 				ED7C68052878D7FD006D5882 /* CustomButtons.swift in Sources */,

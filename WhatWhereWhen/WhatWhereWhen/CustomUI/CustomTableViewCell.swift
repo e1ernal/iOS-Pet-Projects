@@ -10,9 +10,9 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
-    var rewardLabel = RewardLabel()
+    var rewardLabel  = RewardLabel()
     var attemptLabel = LightLabel()
-    var scoreLabel = LightLabel()
+    var scoreLabel   = LightLabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
