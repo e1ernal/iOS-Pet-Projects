@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-class RegularButton: UIButton {
-    
+class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -26,10 +25,28 @@ class RegularButton: UIButton {
     }
     
     func setup() {
+        self.titleLabel?.numberOfLines = 0
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.size.height / 2.0
+        self.translatesAutoresizingMaskIntoConstraints = false
+        setColor()
+    }
+    
+    func setColor() {}
+}
+
+class RegularButton: CustomButton {
+    
+    override func setColor() {
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = .systemBlue
-        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+class HintButton: CustomButton {
+    
+    override func setColor() {
+        self.setTitleColor(UIColor.systemBlue, for: .normal)
+        self.backgroundColor = .systemGray6
     }
 }

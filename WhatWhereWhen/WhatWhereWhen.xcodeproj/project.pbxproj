@@ -14,10 +14,12 @@
 		ED7C67EF2878CDFF006D5882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7C67ED2878CDFF006D5882 /* LaunchScreen.storyboard */; };
 		ED7C67F82878CF4F006D5882 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C67F72878CF4F006D5882 /* StartVC.swift */; };
 		ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68022878D3B2006D5882 /* UISettings.swift */; };
-		ED7C68052878D7FD006D5882 /* RegularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68042878D7FD006D5882 /* RegularButton.swift */; };
+		ED7C68052878D7FD006D5882 /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68042878D7FD006D5882 /* CustomButtons.swift */; };
 		ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68062878E919006D5882 /* CustomLabels.swift */; };
 		ED7C68092878ED6F006D5882 /* QuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C68082878ED6F006D5882 /* QuestionsVC.swift */; };
 		ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */; };
+		EDC0209E287B8872002FD4AE /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC0209D287B8872002FD4AE /* questions.json */; };
+		EDC020A1287B920A002FD4AE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A0287B920A002FD4AE /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +32,12 @@
 		ED7C67F02878CDFF006D5882 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED7C67F72878CF4F006D5882 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		ED7C68022878D3B2006D5882 /* UISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
-		ED7C68042878D7FD006D5882 /* RegularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularButton.swift; sourceTree = "<group>"; };
+		ED7C68042878D7FD006D5882 /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
 		ED7C68062878E919006D5882 /* CustomLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabels.swift; sourceTree = "<group>"; };
 		ED7C68082878ED6F006D5882 /* QuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsVC.swift; sourceTree = "<group>"; };
 		ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		EDC0209D287B8872002FD4AE /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
+		EDC020A0287B920A002FD4AE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		ED7C67DE2878CDFD006D5882 /* WhatWhereWhen */ = {
 			isa = PBXGroup;
 			children = (
+				EDC0209F287B91E5002FD4AE /* Model */,
 				ED7C67FB2878D0EB006D5882 /* CustomUI */,
 				ED7C67F62878CF37006D5882 /* Controllers */,
 				ED7C67DF2878CDFD006D5882 /* AppDelegate.swift */,
@@ -73,7 +78,7 @@
 				ED7C67EB2878CDFF006D5882 /* Assets.xcassets */,
 				ED7C67ED2878CDFF006D5882 /* LaunchScreen.storyboard */,
 				ED7C67F02878CDFF006D5882 /* Info.plist */,
-				ED7C67E82878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld */,
+				EDC0209D287B8872002FD4AE /* questions.json */,
 			);
 			path = WhatWhereWhen;
 			sourceTree = "<group>";
@@ -91,11 +96,20 @@
 			isa = PBXGroup;
 			children = (
 				ED7C68022878D3B2006D5882 /* UISettings.swift */,
-				ED7C68042878D7FD006D5882 /* RegularButton.swift */,
+				ED7C68042878D7FD006D5882 /* CustomButtons.swift */,
 				ED7C68062878E919006D5882 /* CustomLabels.swift */,
 				ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */,
 			);
 			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		EDC0209F287B91E5002FD4AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDC020A0287B920A002FD4AE /* Model.swift */,
+				ED7C67E82878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC0209E287B8872002FD4AE /* questions.json in Resources */,
 				ED7C67EF2878CDFF006D5882 /* LaunchScreen.storyboard in Resources */,
 				ED7C67EC2878CDFF006D5882 /* Assets.xcassets in Resources */,
 			);
@@ -173,9 +188,10 @@
 				ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */,
 				ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */,
 				ED7C67EA2878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld in Sources */,
+				EDC020A1287B920A002FD4AE /* Model.swift in Sources */,
 				ED7C680B2878F256006D5882 /* CustomTableViewCell.swift in Sources */,
 				ED7C68072878E919006D5882 /* CustomLabels.swift in Sources */,
-				ED7C68052878D7FD006D5882 /* RegularButton.swift in Sources */,
+				ED7C68052878D7FD006D5882 /* CustomButtons.swift in Sources */,
 				ED7C67F82878CF4F006D5882 /* StartVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

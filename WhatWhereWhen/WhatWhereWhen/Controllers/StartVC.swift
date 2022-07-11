@@ -15,7 +15,7 @@ class StartVC: UIViewController {
     
     lazy var titleLbl = TitleLabel()
     lazy var startBtn = RegularButton()
-    lazy var scoreTable: UITableView = {
+    lazy var scoreTbl: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .black
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,8 +27,8 @@ class StartVC: UIViewController {
         makeUI()
         setupTableView()
         startBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        scoreTable.delegate = self
-        scoreTable.dataSource = self
+        scoreTbl.delegate = self
+        scoreTbl.dataSource = self
     }
     
     @objc func buttonAction() {
@@ -52,7 +52,7 @@ extension StartVC {
         
         self.view.addSubview(titleLbl)
         self.view.addSubview(startBtn)
-        self.view.addSubview(scoreTable)
+        self.view.addSubview(scoreTbl)
         
         titleLbl.text = labelTitle
         titleLbl.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: constraint).isActive = true
@@ -66,10 +66,10 @@ extension StartVC {
         startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        scoreTable.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
-        scoreTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
-        scoreTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
-        scoreTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
+        scoreTbl.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
+        scoreTbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
+        scoreTbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
+        scoreTbl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
     }
 }
 
@@ -87,7 +87,7 @@ extension StartVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func setupTableView() {
-        scoreTable.register(CustomTableViewCell.self, forCellReuseIdentifier: "scoreCell")
+        scoreTbl.register(CustomTableViewCell.self, forCellReuseIdentifier: "scoreCell")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,7 +95,7 @@ extension StartVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = scoreTable.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
+        let cell = scoreTbl.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
         
         let score = scores[indexPath.row]
         let maxScore = scores.count
