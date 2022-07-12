@@ -11,14 +11,13 @@ import UIKit
 class ScoreVC: UIViewController {
     
     /* CoreData update */
+//    var scores: [Score] = []
     var scores = [1, 4, 5, 13, 12, 7, 3]
     
     lazy var titleLbl = TitleLabel()
-    lazy var backToStartBtn = RegularButton()
+    lazy var backToMain = CloseButton()
     lazy var scoreTbl: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .black
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -28,7 +27,11 @@ class ScoreVC: UIViewController {
         setupTableView()
         scoreTbl.delegate = self
         scoreTbl.dataSource = self
-        backToStartBtn.addTarget(self, action: #selector(backToStart), for: .touchUpInside)
+        backToMain.addTarget(self, action: #selector(backToStart), for: .touchUpInside)
+       
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.animateTableView()
+        }
     }
     
     @objc func backToStart() {
@@ -40,13 +43,12 @@ extension ScoreVC {
     
     func makeUI() {
         let labelTitle: String = "Результаты"
-        let backToNewGameTitle: String = "Вернуться к началу игры"
         
         self.view.backgroundColor = .black
         let constraint = Constraints.basic.rawValue
         
         self.view.addSubview(titleLbl)
-        self.view.addSubview(backToStartBtn)
+        self.view.addSubview(backToMain)
         self.view.addSubview(scoreTbl)
         
         titleLbl.text = labelTitle
@@ -55,15 +57,16 @@ extension ScoreVC {
         titleLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         titleLbl.frame.size.height = 40
         
-        backToStartBtn.setTitle(backToNewGameTitle, for: .normal)
-        backToStartBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
-        backToStartBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
-        backToStartBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
+        backToMain.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
+        backToMain.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
         
+        scoreTbl.backgroundColor = .black
+        scoreTbl.translatesAutoresizingMaskIntoConstraints = false
         scoreTbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: constraint).isActive = true
-        scoreTbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
-        scoreTbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
-        scoreTbl.bottomAnchor.constraint(equalTo: backToStartBtn.topAnchor, constant: -constraint).isActive = true
+        scoreTbl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scoreTbl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scoreTbl.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
+        scoreTbl.alpha = 0
     }
 }
 
@@ -77,7 +80,13 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "По количеству набранных очков"
+        let normalTitle: String = "Список всех попыток"
+        let emptyTitle: String = "Результатов нет"
+        if scores.isEmpty {
+            return emptyTitle
+        } else {
+            return normalTitle
+        }
     }
     
     func setupTableView() {
@@ -111,5 +120,29 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
             default: cell.rewardLabel.text = Reward.other.rawValue
         }
         return cell
+    }
+}
+
+extension ScoreVC {
+    func animateTableView() {
+//        scoreTbl.reloadData()
+        
+        let cells = scoreTbl.visibleCells
+        let tableViewHeight = scoreTbl.bounds.height
+        var delay: Double = 0
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+            UIView.animate(withDuration: 2,
+                           delay: delay * 0.05,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: { [self] in
+                cell.transform = CGAffineTransform.identity
+                scoreTbl.alpha = 1
+            })
+            delay += 1
+        }
     }
 }

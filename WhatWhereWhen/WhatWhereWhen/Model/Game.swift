@@ -23,7 +23,7 @@ class GameEntities {
         currentQuestion = -1
     }
     
-    func stopGame() {
+    func endGame() {
         score = 0
         timePerQuestion = 0
         stopTimer()

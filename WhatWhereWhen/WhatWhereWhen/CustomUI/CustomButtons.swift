@@ -48,3 +48,14 @@ class FurtherButton: CustomButton {
         self.backgroundColor = .systemGray6
     }
 }
+
+class CloseButton: CustomButton {
+    override func setDefaultColor() {
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
+        let closeImage = UIImage(systemName: "xmark.circle", withConfiguration: symbolConfiguration)
+        self.setImage(closeImage, for: .normal)
+        self.heightAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
+        self.widthAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
+    }
+    
+}

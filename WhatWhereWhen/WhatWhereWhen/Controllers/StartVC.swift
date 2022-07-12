@@ -22,7 +22,7 @@ class StartVC: UIViewController {
     }
     
     @objc func showQuestions() {
-        let nextVC: QuestionsVC = QuestionsVC()
+        let nextVC: AlertVC = AlertVC()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -39,8 +39,8 @@ extension StartVC {
                                  15 вопросов из игры
                                  <Что? Где? Когда?>
                                  """
-        let startGameTitle: String = "Начать играть"
-        let showScoreTitle: String = "Показать результаты"
+        let startGameTitle: String = "Игра"
+        let showScoreTitle: String = "Таблица результатов"
         
         self.view.backgroundColor = .black
         let constraint = Constraints.basic.rawValue

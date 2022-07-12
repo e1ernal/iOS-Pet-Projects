@@ -14,3 +14,11 @@ struct Question: Codable {
     let answers: [String]
     let answer: String
 }
+
+struct Score {
+    let name: String
+    let date: Date
+    let score: Int
+    let time: Int
+    let totalScore: Int
+}

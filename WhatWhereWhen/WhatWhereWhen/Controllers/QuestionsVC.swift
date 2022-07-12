@@ -40,12 +40,12 @@ class QuestionsVC: UIViewController, Playable {
     func showNextQuestion() {
         
         guard prepared() else {
-            /// Go to ScoreVC
             let nextVC: ScoreVC = ScoreVC()
             navigationController?.pushViewController(nextVC, animated: true)
             print("SCORE: \(game.score)")
             print("Game ower.")
-            game.stopGame()
+            /// update score array
+            game.endGame()
             return
         }
         

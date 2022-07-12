@@ -23,6 +23,8 @@
 		EDC020A3287BAC06002FD4AE /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A2287BAC06002FD4AE /* Network.swift */; };
 		EDC020A5287C4334002FD4AE /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A4287C4334002FD4AE /* Game.swift */; };
 		EDC020A8287C65B2002FD4AE /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC020A7287C65B2002FD4AE /* ScoreVC.swift */; };
+		EDEFF231287CB8EE0045920E /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFF230287CB8EE0045920E /* Popup.swift */; };
+		EDEFF235287CE6A30045920E /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFF234287CE6A30045920E /* AlertVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		EDC020A2287BAC06002FD4AE /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		EDC020A4287C4334002FD4AE /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		EDC020A7287C65B2002FD4AE /* ScoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
+		EDEFF230287CB8EE0045920E /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		EDEFF234287CE6A30045920E /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 				ED7C67F72878CF4F006D5882 /* StartVC.swift */,
 				ED7C68082878ED6F006D5882 /* QuestionsVC.swift */,
 				EDC020A7287C65B2002FD4AE /* ScoreVC.swift */,
+				EDEFF234287CE6A30045920E /* AlertVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 				ED7C68042878D7FD006D5882 /* CustomButtons.swift */,
 				ED7C68062878E919006D5882 /* CustomLabels.swift */,
 				ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */,
+				EDEFF230287CB8EE0045920E /* Popup.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -192,8 +198,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDEFF231287CB8EE0045920E /* Popup.swift in Sources */,
 				ED7C68092878ED6F006D5882 /* QuestionsVC.swift in Sources */,
 				ED7C67E02878CDFD006D5882 /* AppDelegate.swift in Sources */,
+				EDEFF235287CE6A30045920E /* AlertVC.swift in Sources */,
 				ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */,
 				ED7C68032878D3B2006D5882 /* UISettings.swift in Sources */,
 				ED7C67EA2878CDFD006D5882 /* WhatWhereWhen.xcdatamodeld in Sources */,
