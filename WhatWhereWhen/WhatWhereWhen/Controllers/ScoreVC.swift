@@ -10,16 +10,9 @@ import UIKit
 
 class ScoreVC: UIViewController {
     
-    /* CoreData update */
-//    var scores: [Score] = []
-    var scores = [1, 4, 5, 13, 12, 7, 3]
-    
     lazy var titleLbl = TitleLabel()
+    lazy var scoreTbl = UITableView(frame: .zero, style: .insetGrouped)
     lazy var backToMain = CloseButton()
-    lazy var scoreTbl: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        return tableView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +21,13 @@ class ScoreVC: UIViewController {
         scoreTbl.delegate = self
         scoreTbl.dataSource = self
         backToMain.addTarget(self, action: #selector(backToStart), for: .touchUpInside)
-       
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        ModelRequest().getAllItems()
+        scoreTbl.reloadData()
+        ModelRequest().getAllItems()
+        DispatchQueue.main.async {
             self.animateTableView()
         }
     }
@@ -59,7 +57,7 @@ extension ScoreVC {
         
         backToMain.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         backToMain.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
-        
+    
         scoreTbl.backgroundColor = .black
         scoreTbl.translatesAutoresizingMaskIntoConstraints = false
         scoreTbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: constraint).isActive = true
@@ -118,6 +116,7 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
                 cell.rewardLabel.text = Reward.third.rawValue
                 cell.backgroundColor = .systemGreen.withAlphaComponent(0.3)
             default: cell.rewardLabel.text = Reward.other.rawValue
+                     cell.backgroundColor = .systemBackground.withAlphaComponent(0.15)
         }
         return cell
     }
@@ -125,8 +124,6 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
 
 extension ScoreVC {
     func animateTableView() {
-//        scoreTbl.reloadData()
-        
         let cells = scoreTbl.visibleCells
         let tableViewHeight = scoreTbl.bounds.height
         var delay: Double = 0

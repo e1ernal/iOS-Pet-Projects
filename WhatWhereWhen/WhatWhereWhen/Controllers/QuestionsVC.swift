@@ -10,7 +10,7 @@ import UIKit
 
 class QuestionsVC: UIViewController, Playable {
     
-    /// Playable protocol
+    // MARK: Playable protocol
     var game = GameEntities()
     
     lazy var timerLbl          = RegularLabel()
@@ -23,28 +23,33 @@ class QuestionsVC: UIViewController, Playable {
     lazy var answer3Btn = RegularButton()
     lazy var getHintBtn = FurtherButton()
     
-    /// Get from CoreData
     var questions: [Question] = []
     var time: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /// JSON request
         requestNetworkData()
-        game.newGame()
         makeUI()
+        game.newGame()
         showNextQuestion()
     }
     
     func showNextQuestion() {
         
+        // MARK: Show Score at the end of questions
         guard prepared() else {
-            let nextVC: ScoreVC = ScoreVC()
-            navigationController?.pushViewController(nextVC, animated: true)
             print("SCORE: \(game.score)")
             print("Game ower.")
-            /// update score array
+            
+            ModelRequest().appendItem(score: game.score,
+                                       name: game.name,
+                                       time: game.time,
+                                       date: game.date)
+            
+            let nextVC: ResultVC = ResultVC()
+            nextVC.score = game.score
+            nextVC.time = game.time
+            navigationController?.pushViewController(nextVC, animated: true)
             game.endGame()
             return
         }
@@ -62,7 +67,7 @@ class QuestionsVC: UIViewController, Playable {
         let randAnswer = [0, 1, 2].shuffled()
         let answers = questions[game.currentQuestion].answers
         
-        timerLbl.text = " : "
+        timerLbl.text = " "
         questionNumberLbl.text = "Вопрос №\(game.currentQuestion + 1)"
         questionTitleLbl.text = "<\(questions[game.currentQuestion].title)>"
         questionLbl.text = questions[game.currentQuestion].question
@@ -74,15 +79,16 @@ class QuestionsVC: UIViewController, Playable {
         
     }
     
+    // MARK: Array out of bounds check
     func prepared() -> Bool {
         game.currentQuestion += 1
         guard !questions.isEmpty else { return false }
         guard game.currentQuestion < questions.count else { return false }
         return true
     }
-    /// Action every time interval
+    
+    // MARK: Update timer every time interval
     @objc func updateTimer() {
-        /// Update Label
         if time >= 0 {
             switch time {
                 case 41...  : timerLbl.textColor = .systemGreen
@@ -101,28 +107,28 @@ class QuestionsVC: UIViewController, Playable {
     }
     
     @objc func answerPressed(sender: UIButton) {
-        
         let answer = questions[game.currentQuestion].answer
         
         if sender.titleLabel?.text == answer {
             print("\(game.currentQuestion): [+] Ответ верный.")
             game.score += game.plusPoint
         } else {
-            print("\(game.currentQuestion):[-] Ответ неверный.")
+            print("\(game.currentQuestion): [-] Ответ неверный.")
         }
+        game.time += game.timePerQuestion - time
         showNextQuestion()
     }
     
+    // MARK: Open Hint View Contoller
     @objc func getHintAction(sender: UIButton) {
-        /// Open HintVC
     }
 }
 
 extension QuestionsVC {
     
     func makeUI() {
-        
         let constraint = Constraints.basic.rawValue
+        self.view.backgroundColor = .black
         
         self.view.addSubview(timerLbl)
         self.view.addSubview(questionNumberLbl)
@@ -190,10 +196,12 @@ extension QuestionsVC {
 extension QuestionsVC {
     func requestNetworkData() {
         let net = Network()
+        
+        // MARK: Request to local file
         guard let file = net.readLocalFile(forName: "questions") else { return }
         questions = net.parse(jsonData: file)
         
-        /* Work with URL */
+        // MARK: Request by URL
         //        let urlString = "https://api.jsonbin.io/v3/b/62cb813ef023111c70717c3a"
         //
         //        net.loadJson(fromURLString: urlString) { (result) in

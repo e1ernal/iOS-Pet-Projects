@@ -22,7 +22,7 @@ class StartVC: UIViewController {
     }
     
     @objc func showQuestions() {
-        let nextVC: AlertVC = AlertVC()
+        let nextVC: PrepareVC = PrepareVC()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -60,7 +60,7 @@ extension StartVC {
         startBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         startBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
+
         scoreBtn.setTitle(showScoreTitle, for: .normal)
         scoreBtn.topAnchor.constraint(equalTo: startBtn.bottomAnchor, constant: constraint).isActive = true
         scoreBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true

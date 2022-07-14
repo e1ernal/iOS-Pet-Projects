@@ -8,7 +8,6 @@
 import Foundation
 
 class Network {
-    
     func readLocalFile(forName name: String) -> Data? {
         do {
             if let bundlePath = Bundle.main.path(forResource: name, ofType: "json"),
