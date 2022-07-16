@@ -37,6 +37,7 @@ class GameEntities {
         timePerQuestion = 90
         currentQuestion = -1
         time = 0
+        date = Date()
     }
     
     func endGame() {

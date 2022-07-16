@@ -29,33 +29,45 @@ class CustomButton: UIButton {
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.size.height / 2.0
         self.translatesAutoresizingMaskIntoConstraints = false
-        setDefaultColor()
+        extraSetup()
     }
     
-    func setDefaultColor() {}
+    func extraSetup() {}
 }
 
 class RegularButton: CustomButton {
-    override func setDefaultColor() {
+    override func extraSetup() {
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = .systemBlue
     }
 }
 
 class FurtherButton: CustomButton {
-    override func setDefaultColor() {
+    override func extraSetup() {
         self.setTitleColor(UIColor.systemBlue, for: .normal)
         self.backgroundColor = .systemGray6
     }
 }
 
-class CloseButton: CustomButton {
-    override func setDefaultColor() {
+class ImageButton: CustomButton {
+    func setupImage(image: String) {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        let closeImage = UIImage(systemName: "xmark.circle", withConfiguration: symbolConfiguration)
+        let closeImage = UIImage(systemName: image, withConfiguration: symbolConfiguration)
         self.setImage(closeImage, for: .normal)
+        self.imageView?.contentMode = .scaleAspectFit
         self.heightAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
         self.widthAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
     }
-    
+}
+
+class CloseButton: ImageButton {
+    override func extraSetup() {
+        setupImage(image: "xmark.circle")
+    }
+}
+
+class SortButton: ImageButton {
+    override func extraSetup() {
+        setupImage(image: "arrow.up.arrow.down")
+    }
 }

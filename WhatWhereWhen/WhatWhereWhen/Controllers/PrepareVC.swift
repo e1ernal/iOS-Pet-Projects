@@ -18,7 +18,7 @@ class PrepareVC: UIViewController {
     let container: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = .systemBackground.withAlphaComponent(0.15)
+        container.backgroundColor = .systemGray6
         container.layer.cornerRadius = 24
         return container
     }()
@@ -41,7 +41,7 @@ class PrepareVC: UIViewController {
         }
     }
     
-    @objc func resultBtnAction() {
+    @objc func startBtnAction() {
         guard let name = nameTxtFld.text, name != "" else {
             // MARK: Shake animation of Text Field
             let animation = CABasicAnimation(keyPath: "position")
@@ -53,6 +53,7 @@ class PrepareVC: UIViewController {
             nameTxtFld.layer.add(animation, forKey: "position")
             return
         }
+        self.dismissKeyboard()
         // MARK: Out Animation
         UIView.animate(with: .popup) {
             self.container.transform = CGAffineTransform(translationX: 0, y: -0.25 * self.view.frame.height)
@@ -76,7 +77,7 @@ extension PrepareVC {
         let constraint = Constraints.basic.rawValue
         let dynamicHeight = Double(stack.subviews.capacity - 1) * 0.1
         
-        let tapStart = UITapGestureRecognizer(target: self, action: #selector(resultBtnAction))
+        let tapStart = UITapGestureRecognizer(target: self, action: #selector(startBtnAction))
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeBtnAction))
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         

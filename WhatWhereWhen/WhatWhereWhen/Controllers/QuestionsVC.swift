@@ -22,6 +22,7 @@ class QuestionsVC: UIViewController, Playable {
     lazy var answer2Btn = RegularButton()
     lazy var answer3Btn = RegularButton()
     lazy var getHintBtn = FurtherButton()
+    lazy var pageControl = UIPageControl(frame: .zero)
     
     var questions: [Question] = []
     var time: Int = 0
@@ -35,13 +36,8 @@ class QuestionsVC: UIViewController, Playable {
     }
     
     func showNextQuestion() {
-        
         // MARK: Show Score at the end of questions
         guard prepared() else {
-            print("SCORE: \(game.score)")
-            print("Game ower.")
-            print("Count: \(questions.count)")
-            print("Plus: \(game.plusPoint)")
             ModelRequest().appendItem(score: game.score,
                                        name: game.name,
                                        time: game.time,
@@ -53,6 +49,7 @@ class QuestionsVC: UIViewController, Playable {
             let nextVC: ResultVC = ResultVC()
             nextVC.score = game.score
             nextVC.time = game.time
+            nextVC.maxScore = questions.count * game.plusPoint
             navigationController?.pushViewController(nextVC, animated: true)
             game.endGame()
             return
@@ -72,6 +69,7 @@ class QuestionsVC: UIViewController, Playable {
         let answers = questions[game.currentQuestion].answers
         
         timerLbl.text = " "
+        pageControl.currentPage = game.currentQuestion
         questionNumberLbl.text = "Вопрос №\(game.currentQuestion + 1)"
         questionTitleLbl.text = "<\(questions[game.currentQuestion].title)>"
         questionLbl.text = questions[game.currentQuestion].question
@@ -106,6 +104,7 @@ class QuestionsVC: UIViewController, Playable {
             timerLbl.text = minutes + " : " + seconds
             time -= 1
         } else if time < 0 {
+            game.time += game.timePerQuestion - time
             showNextQuestion()
         }
     }
@@ -135,6 +134,7 @@ extension QuestionsVC {
         let constraint = Constraints.basic.rawValue
         self.view.backgroundColor = .black
         
+        self.view.addSubview(pageControl)
         self.view.addSubview(timerLbl)
         self.view.addSubview(questionNumberLbl)
         self.view.addSubview(questionTitleLbl)
@@ -144,8 +144,16 @@ extension QuestionsVC {
         self.view.addSubview(answer3Btn)
         self.view.addSubview(getHintBtn)
         
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
+        pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constraint).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
+        pageControl.numberOfPages = questions.count
+        pageControl.currentPageIndicatorTintColor = .systemBlue
+        pageControl.pageIndicatorTintColor = .systemGray6
+        
         timerLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
-        timerLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constraint).isActive = true
+        timerLbl.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: constraint).isActive = true
         timerLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         timerLbl.frame.size.height = 25
         
@@ -191,10 +199,10 @@ extension QuestionsVC {
     func defaultColors() {
         timerLbl.textColor = .white
         
-        answer1Btn.setDefaultColor()
-        answer2Btn.setDefaultColor()
-        answer3Btn.setDefaultColor()
-        getHintBtn.setDefaultColor()
+        answer1Btn.extraSetup()
+        answer2Btn.extraSetup()
+        answer3Btn.extraSetup()
+        getHintBtn.extraSetup()
     }
 }
 

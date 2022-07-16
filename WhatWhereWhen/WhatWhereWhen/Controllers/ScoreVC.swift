@@ -13,9 +13,12 @@ class ScoreVC: UIViewController {
     lazy var titleLbl = TitleLabel()
     lazy var scoreTbl = UITableView(frame: .zero, style: .insetGrouped)
     lazy var backToMain = CloseButton()
+    lazy var menuBtn = SortButton()
+    var headerTableView: String = "Все результаты"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ModelRequest().getAllItems()
         makeUI()
         setupTableView()
         scoreTbl.delegate = self
@@ -39,24 +42,58 @@ class ScoreVC: UIViewController {
 extension ScoreVC {
     
     func makeUI() {
-        let labelTitle: String = "Результаты"
-        
         self.view.backgroundColor = .black
         let constraint = Constraints.basic.rawValue
         
         self.view.addSubview(titleLbl)
+        self.view.addSubview(menuBtn)
         self.view.addSubview(backToMain)
         self.view.addSubview(scoreTbl)
         
-        titleLbl.text = labelTitle
+        titleLbl.text = "Результаты"
         titleLbl.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: constraint).isActive = true
         titleLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
         titleLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         titleLbl.frame.size.height = 40
         
+        let sortResultUp = UIAction(title: "Очки: max") { _ in
+            scores.sort(by: { $0.score > $1.score })
+            self.headerTableView = "Все результаты: очки ↓"
+            self.scoreTbl.reloadData()
+        }
+        let sortResultDown = UIAction(title: "Очки: min") { _ in
+            scores.sort(by: { $0.score < $1.score })
+            self.headerTableView = "Все результаты: очки ↑"
+            self.scoreTbl.reloadData()
+        }
+        let sortDateUp = UIAction(title: "Дата: новые") { _ in
+            scores.sort(by: { $0.date ?? Date() > $1.date ?? Date() })
+            self.headerTableView = "Все результаты: дата ↓"
+            self.scoreTbl.reloadData()
+        }
+        let sortDateDown = UIAction(title: "Дата: старые") { _ in
+            scores.sort(by: { $0.date ?? Date() < $1.date ?? Date() })
+            self.headerTableView = "Все результаты: дата ↑"
+            self.scoreTbl.reloadData()
+        }
+        
+        let menu = UIMenu(title: "Сортировка таблицы",
+                         children: [
+            sortResultUp,
+            sortResultDown,
+            sortDateUp,
+            sortDateDown
+        ])
+        
+        menuBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constraint).isActive = true
+        menuBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
+        menuBtn.menu = menu
+        menuBtn.showsMenuAsPrimaryAction = true
+        menuBtn.setImage(.init(systemName: "arrow.up.arrow.down"), for: .normal)
+        
         backToMain.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         backToMain.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
-    
+
         scoreTbl.backgroundColor = .black
         scoreTbl.translatesAutoresizingMaskIntoConstraints = false
         scoreTbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: constraint).isActive = true
@@ -68,7 +105,6 @@ extension ScoreVC {
 }
 
 extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = .black
         let header = view as! UITableViewHeaderFooterView
@@ -77,13 +113,10 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let normalTitle: String = "Список всех попыток"
-        let emptyTitle: String = "Результатов нет"
         if scores.isEmpty {
-            return emptyTitle
-        } else {
-            return normalTitle
+            headerTableView = "Результатов нет"
         }
+        return headerTableView
     }
     
     func setupTableView() {
@@ -93,18 +126,36 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return scores.count
     }
-    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // MARK: Helping entities
+        let score = scores[indexPath.row].score
+        let maxScore = scores[indexPath.row].maxScore
+        let scorePercent = round(Double(100 * score / maxScore))
+        let name = scores[indexPath.row].name
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
-        let scorePercent = round(Double(100 * scores[indexPath.row].score / scores[indexPath.row].maxScore))
+        let rightQuestions = scores[indexPath.row].rightQuestions
+        let allQuestions = scores[indexPath.row].allQuestions
+        let time = scores[indexPath.row].time
+        var date: String = ""
+        guard let dateTime = scores[indexPath.row].date else { return cell }
+        let format = DateFormatter()
+        format.dateFormat = "HH:mm "
+        date += format.string(from: dateTime)
+        format.dateFormat = "dd.MM.yy"
+        date += format.string(from: dateTime)
         
-        cell.nameLabel.text = scores[indexPath.row].name
-        cell.scoreLabel.text = String(scores[indexPath.row].score)
-        cell.questions.text = "\(scores[indexPath.row].rightQuestions)/\(scores[indexPath.row].allQuestions)"
-        cell.perсеntLabel.text = String(scorePercent) + "%"
-        cell.time.text = String(scores[indexPath.row].time)
-        cell.date.text = "01.01.21 12:34"
-        cell.backgroundColor = .systemBackground.withAlphaComponent(0.15)
+        cell.nameLabel.text = name
+        cell.scoreLabel.text = "\(score)"
+        cell.questions.text = "\(rightQuestions)/\(allQuestions)"
+        cell.perсеntLabel.text = "\(scorePercent)%"
+        cell.time.text = "\(time / 60) мин \(time % 60) сек"
+        cell.date.text = "\(date)"
+        
+        // MARK: Color Cell
+        cell.backgroundColor = .systemGray6
         switch scorePercent {
         case 0...20:
             cell.squareView.backgroundColor = .darkGray.withAlphaComponent(0.5)
@@ -119,6 +170,7 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
         default:
             cell.squareView.backgroundColor = .darkGray.withAlphaComponent(0.5)
         }
+        
         return cell
     }
     

@@ -19,7 +19,6 @@ class StartVC: UIViewController {
         makeUI()
         startBtn.addTarget(self, action: #selector(showQuestions), for: .touchUpInside)
         scoreBtn.addTarget(self, action: #selector(showScore), for: .touchUpInside)
-        print(scores.count)
     }
     
     @objc func showQuestions() {
@@ -40,7 +39,7 @@ extension StartVC {
                                  15 вопросов из игры
                                  <Что? Где? Когда?>
                                  """
-        let startGameTitle: String = "Игра"
+        let startGameTitle: String = "Играть"
         let showScoreTitle: String = "Таблица результатов"
         
         self.view.backgroundColor = .black

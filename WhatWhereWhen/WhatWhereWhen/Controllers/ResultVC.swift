@@ -12,17 +12,21 @@ class ResultVC: UIViewController {
     
     var score: Int = 0
     var time: Int = 0
+    var maxScore: Int = 1000
     
     let titleLbl = TitleLabel()
     let closeBtn = CloseButton()
     let resultBtn = RegularButton()
+    
+    let scoreTitle = RegularLabel()
     let scoreLbl = RegularLabel()
+    let timeTitle = RegularLabel()
     let timeLbl = RegularLabel()
     
     let container: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = .systemBackground.withAlphaComponent(0.15)
+        container.backgroundColor = .systemGray6
         container.layer.cornerRadius = 24
         return container
     }()
@@ -98,9 +102,9 @@ extension ResultVC {
         
         resultBtn.setTitle("Таблица результатов", for: .normal)
         
-        scoreLbl.text = "Результат: \(score)"
+        scoreLbl.text = "Результат: \(score) очков из \(maxScore)"
         scoreLbl.textAlignment = .left
-        timeLbl.text  = "Время: min: \(Double(time / 60)), sec: \(time % 60)"
+        timeLbl.text  = "Время: \(Double(time / 60)) мин \(time % 60) сек"
         timeLbl.textAlignment = .left
         
         closeBtn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -constraint).isActive = true
