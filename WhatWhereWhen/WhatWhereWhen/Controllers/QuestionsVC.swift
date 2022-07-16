@@ -40,11 +40,15 @@ class QuestionsVC: UIViewController, Playable {
         guard prepared() else {
             print("SCORE: \(game.score)")
             print("Game ower.")
-            
+            print("Count: \(questions.count)")
+            print("Plus: \(game.plusPoint)")
             ModelRequest().appendItem(score: game.score,
                                        name: game.name,
                                        time: game.time,
-                                       date: game.date)
+                                       date: game.date,
+                                   maxScore: questions.count * game.plusPoint,
+                               allQuestions: questions.count,
+                             rightQuestions: game.questions)
             
             let nextVC: ResultVC = ResultVC()
             nextVC.score = game.score
@@ -112,6 +116,7 @@ class QuestionsVC: UIViewController, Playable {
         if sender.titleLabel?.text == answer {
             print("\(game.currentQuestion): [+] Ответ верный.")
             game.score += game.plusPoint
+            game.questions += 1
         } else {
             print("\(game.currentQuestion): [-] Ответ неверный.")
         }

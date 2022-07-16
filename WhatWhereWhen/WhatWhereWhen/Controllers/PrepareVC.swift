@@ -84,7 +84,6 @@ extension PrepareVC {
         closeBtn.addGestureRecognizer(tapClose)
         self.view.addGestureRecognizer(tap)
         
-        
         self.view.backgroundColor = .black
         self.view.frame = UIScreen.main.bounds
         

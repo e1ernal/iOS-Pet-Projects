@@ -16,12 +16,15 @@ class ModelRequest {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func appendItem(score: Int, name: String, time: Int, date: Date) {
+    func appendItem(score: Int, name: String, time: Int, date: Date, maxScore: Int, allQuestions: Int, rightQuestions: Int) {
         let scoreObject = Score(context: context)
         scoreObject.score = Int64(score)
         scoreObject.name = name
         scoreObject.date = date
         scoreObject.time = Int64(time)
+        scoreObject.maxScore = Int64(maxScore)
+        scoreObject.allQuestions = Int64(allQuestions)
+        scoreObject.rightQuestions = Int64(rightQuestions)
         
         do {
             try context.save()
@@ -43,6 +46,7 @@ class ModelRequest {
         for score in scores {
             context.delete(score)
         }
+        scores.removeAll()
         do {
             try context.save()
             scores.removeAll()

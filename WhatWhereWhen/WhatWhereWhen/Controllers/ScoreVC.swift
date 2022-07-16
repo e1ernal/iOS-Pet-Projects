@@ -26,7 +26,6 @@ class ScoreVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         ModelRequest().getAllItems()
         scoreTbl.reloadData()
-        ModelRequest().getAllItems()
         DispatchQueue.main.async {
             self.animateTableView()
         }
@@ -64,7 +63,7 @@ extension ScoreVC {
         scoreTbl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scoreTbl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scoreTbl.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -constraint).isActive = true
-        scoreTbl.alpha = 0
+        scoreTbl.alpha = (scores.isEmpty ? 1 : 0)
     }
 }
 
@@ -96,29 +95,35 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = scoreTbl.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scoreCell", for: indexPath) as! CustomTableViewCell
+        let scorePercent = round(Double(100 * scores[indexPath.row].score / scores[indexPath.row].maxScore))
         
-        let score = scores[indexPath.row]
-        let maxScore = scores.count
-        let attempt = indexPath.row + 1
-        
-        cell.attemptLabel.text = "Попытка №\(attempt)"
-        cell.scoreLabel.text = "Набрано: \(score) из \(maxScore)"
-        
-        switch indexPath.row {
-            case 0:
-                cell.rewardLabel.text = Reward.first.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.7)
-            case 1:
-                cell.rewardLabel.text = Reward.second.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.5)
-            case 2:
-                cell.rewardLabel.text = Reward.third.rawValue
-                cell.backgroundColor = .systemGreen.withAlphaComponent(0.3)
-            default: cell.rewardLabel.text = Reward.other.rawValue
-                     cell.backgroundColor = .systemBackground.withAlphaComponent(0.15)
+        cell.nameLabel.text = scores[indexPath.row].name
+        cell.scoreLabel.text = String(scores[indexPath.row].score)
+        cell.questions.text = "\(scores[indexPath.row].rightQuestions)/\(scores[indexPath.row].allQuestions)"
+        cell.perсеntLabel.text = String(scorePercent) + "%"
+        cell.time.text = String(scores[indexPath.row].time)
+        cell.date.text = "01.01.21 12:34"
+        cell.backgroundColor = .systemBackground.withAlphaComponent(0.15)
+        switch scorePercent {
+        case 0...20:
+            cell.squareView.backgroundColor = .darkGray.withAlphaComponent(0.5)
+        case 21...40:
+            cell.squareView.backgroundColor = .red.withAlphaComponent(0.5)
+        case 41...60:
+            cell.squareView.backgroundColor = .yellow.withAlphaComponent(0.5)
+        case 61...80:
+            cell.squareView.backgroundColor = .orange.withAlphaComponent(0.5)
+        case 81...100:
+            cell.squareView.backgroundColor = .green.withAlphaComponent(0.5)
+        default:
+            cell.squareView.backgroundColor = .darkGray.withAlphaComponent(0.5)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 

@@ -20,6 +20,7 @@ class GameEntities {
     var date: Date = Date()
     var time: Int = 3600
     var score: Int = 0
+    var questions: Int = 0
     
     // MARK: Game Service
     var currentQuestion: Int = -1
@@ -32,7 +33,6 @@ class GameEntities {
     var minusPointByHint_RightAnswer: Int = 8
     
     func newGame() {
-        name = "Player name"
         score = 0
         timePerQuestion = 90
         currentQuestion = -1

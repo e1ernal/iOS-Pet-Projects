@@ -19,6 +19,7 @@ class StartVC: UIViewController {
         makeUI()
         startBtn.addTarget(self, action: #selector(showQuestions), for: .touchUpInside)
         scoreBtn.addTarget(self, action: #selector(showScore), for: .touchUpInside)
+        print(scores.count)
     }
     
     @objc func showQuestions() {

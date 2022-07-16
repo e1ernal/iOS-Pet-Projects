@@ -38,7 +38,7 @@ class TitleLabel: CustomLabels {
 
 class SubtitleLabel: CustomLabels {
     override func setFont() {
-        self.font = UIFont.systemFont(ofSize: TextSize.subtitle.rawValue, weight: TextWeight.regular.getWeight())
+        self.font = UIFont.systemFont(ofSize: TextSize.subtitle.rawValue, weight: TextWeight.subtitle.getWeight())
     }
 }
 
@@ -50,13 +50,12 @@ class RegularLabel: CustomLabels {
 
 class LightLabel: CustomLabels {
     override func setFont() {
-        self.font = UIFont.systemFont(ofSize: TextSize.small.rawValue, weight: TextWeight.light.getWeight())
+        self.font = UIFont.systemFont(ofSize: TextSize.light.rawValue, weight: TextWeight.light.getWeight())
     }
 }
 
-class RewardLabel: CustomLabels {
+class SmallLabel: CustomLabels {
     override func setFont() {
-        self.font = UIFont.systemFont(ofSize: TextSize.regular.rawValue, weight: TextWeight.regular.getWeight())
-        self.text = Reward.other.rawValue
+        self.font = UIFont.systemFont(ofSize: TextSize.small.rawValue, weight: TextWeight.light.getWeight())
     }
 }

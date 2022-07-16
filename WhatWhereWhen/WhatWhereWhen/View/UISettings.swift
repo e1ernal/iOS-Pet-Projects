@@ -32,17 +32,12 @@ enum TextSize: CGFloat {
     case title    = 30
     case subtitle = 25
     case regular  = 20
-    case small    = 15
+    case light    = 15
+    case small    = 12
 }
 
 enum Constraints: CGFloat {
-    case basic  = 20
     case height = 30
-}
-
-enum Reward: String {
-    case first  = "🥇"
-    case second = "🥈"
-    case third  = "🥉"
-    case other  = ""
+    case basic  = 20
+    case cell   = 10
 }
