@@ -13,7 +13,7 @@ class QuestionsVC: UIViewController, Playable {
     // MARK: Playable protocol
     var game = GameEntities()
     
-    lazy var timerLbl          = RegularLabel()
+    lazy var timerLbl          = TitleLabel()
     lazy var questionNumberLbl = TitleLabel()
     lazy var questionTitleLbl  = SubtitleLabel()
     lazy var questionLbl       = RegularLabel()
@@ -73,6 +73,7 @@ class QuestionsVC: UIViewController, Playable {
         questionNumberLbl.text = "Вопрос №\(game.currentQuestion + 1)"
         questionTitleLbl.text = "<\(questions[game.currentQuestion].title)>"
         questionLbl.text = questions[game.currentQuestion].question
+        questionLbl.numberOfLines = 0
         
         answer1Btn.setTitle(answers[randAnswer[0]], for: .normal)
         answer2Btn.setTitle(answers[randAnswer[1]], for: .normal)

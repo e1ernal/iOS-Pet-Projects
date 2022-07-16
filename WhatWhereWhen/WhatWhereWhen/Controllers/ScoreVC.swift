@@ -14,6 +14,7 @@ class ScoreVC: UIViewController {
     lazy var scoreTbl = UITableView(frame: .zero, style: .insetGrouped)
     lazy var backToMain = CloseButton()
     lazy var menuBtn = SortButton()
+    lazy var searchBar = UISearchBar()
     var headerTableView: String = "Все результаты"
     
     override func viewDidLoad() {
@@ -148,14 +149,13 @@ extension ScoreVC: UITableViewDataSource, UITableViewDelegate {
         date += format.string(from: dateTime)
         
         cell.nameLabel.text = name
-        cell.scoreLabel.text = "\(score)"
+        cell.score.text = "\(score)"
         cell.questions.text = "\(rightQuestions)/\(allQuestions)"
         cell.perсеntLabel.text = "\(scorePercent)%"
         cell.time.text = "\(time / 60) мин \(time % 60) сек"
         cell.date.text = "\(date)"
         
         // MARK: Color Cell
-        cell.backgroundColor = .systemGray6
         switch scorePercent {
         case 0...20:
             cell.squareView.backgroundColor = .darkGray.withAlphaComponent(0.5)

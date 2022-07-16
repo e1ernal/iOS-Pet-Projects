@@ -20,7 +20,6 @@ class CustomLabels: UILabel {
     }
     
     func setup() {
-        self.numberOfLines = 0
         self.textAlignment = .center
         self.textColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false

@@ -28,6 +28,7 @@ class PrepareVC: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.distribution = .equalSpacing
+        stack.spacing = Constraints.basic.rawValue
         return stack
     }()
     
@@ -67,7 +68,15 @@ class PrepareVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUI()
+        self.makeUI()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // MARK: Entry Animation
+        container.transform = CGAffineTransform(translationX: 0, y: -0.25 * self.view.frame.height)
+        UIView.animate(with: .popup) {
+            self.container.transform = .identity
+            self.container.alpha = 1
+        } completion: {_ in }
     }
 }
 
@@ -75,7 +84,6 @@ extension PrepareVC {
     
     func makeUI() {
         let constraint = Constraints.basic.rawValue
-        let dynamicHeight = Double(stack.subviews.capacity - 1) * 0.1
         
         let tapStart = UITapGestureRecognizer(target: self, action: #selector(startBtnAction))
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeBtnAction))
@@ -95,7 +103,6 @@ extension PrepareVC {
         container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
-        container.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: dynamicHeight).isActive = true
         
         stack.topAnchor.constraint(equalTo: container.topAnchor, constant: constraint).isActive = true
         stack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: constraint).isActive = true
@@ -113,13 +120,6 @@ extension PrepareVC {
         
         closeBtn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -constraint).isActive = true
         closeBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
-
-        // MARK: Entry Animation
         container.alpha = 0
-        container.transform = CGAffineTransform(translationX: 0, y: -0.25 * self.view.frame.height)
-        UIView.animate(with: .popup) {
-            self.container.transform = .identity
-            self.container.alpha = 1
-        } completion: {_ in }
     }
 }

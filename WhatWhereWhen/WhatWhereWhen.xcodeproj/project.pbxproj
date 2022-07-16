@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED2BBA18287D780E00AAC729 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2BBA17287D780E00AAC729 /* Gradient.swift */; };
 		ED601E412880CA4500BFCDA2 /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED601E402880CA4500BFCDA2 /* ResultVC.swift */; };
 		ED7C67E02878CDFD006D5882 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C67DF2878CDFD006D5882 /* AppDelegate.swift */; };
 		ED7C67E22878CDFD006D5882 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C67E12878CDFD006D5882 /* SceneDelegate.swift */; };
@@ -31,7 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED2BBA17287D780E00AAC729 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		ED601E402880CA4500BFCDA2 /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 		ED7C67DC2878CDFD006D5882 /* WhatWhereWhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatWhereWhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7C67DF2878CDFD006D5882 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				ED7C68062878E919006D5882 /* CustomLabels.swift */,
 				ED7C680A2878F256006D5882 /* CustomTableViewCell.swift */,
 				EDE61AA1287F9DA300B4AF66 /* Animations.swift */,
-				ED2BBA17287D780E00AAC729 /* Gradient.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,7 +212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED2BBA18287D780E00AAC729 /* Gradient.swift in Sources */,
 				ED7C68092878ED6F006D5882 /* QuestionsVC.swift in Sources */,
 				ED7C67E02878CDFD006D5882 /* AppDelegate.swift in Sources */,
 				EDEFF235287CE6A30045920E /* PrepareVC.swift in Sources */,

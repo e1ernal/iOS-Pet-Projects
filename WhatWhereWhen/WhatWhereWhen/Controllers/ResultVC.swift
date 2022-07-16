@@ -36,6 +36,7 @@ class ResultVC: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.distribution = .equalSpacing
+        stack.spacing = Constraints.basic.rawValue
         return stack
     }()
     
@@ -64,13 +65,20 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
         makeUI()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // MARK: Entry Animation
+        container.transform = CGAffineTransform(translationX: 0, y: -0.25 * self.view.frame.height)
+        UIView.animate(with: .popup) {
+            self.container.transform = .identity
+            self.container.alpha = 1
+        } completion: {_ in }
+    }
 }
 
 extension ResultVC {
     
     func makeUI() {
         let constraint = Constraints.basic.rawValue
-        let dynamicHeight = Double(stack.subviews.capacity - 1) * 0.1
         
         let tapStart = UITapGestureRecognizer(target: self, action: #selector(resultBtnAction))
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeBtnAction))
@@ -91,7 +99,6 @@ extension ResultVC {
         container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9).isActive = true
-        container.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: dynamicHeight).isActive = true
         
         stack.topAnchor.constraint(equalTo: container.topAnchor, constant: constraint).isActive = true
         stack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: constraint).isActive = true
@@ -104,18 +111,11 @@ extension ResultVC {
         
         scoreLbl.text = "Результат: \(score) очков из \(maxScore)"
         scoreLbl.textAlignment = .left
-        timeLbl.text  = "Время: \(Double(time / 60)) мин \(time % 60) сек"
+        timeLbl.text  = "Время: \(time / 60) мин \(time % 60) сек"
         timeLbl.textAlignment = .left
         
         closeBtn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -constraint).isActive = true
         closeBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
-
-        // MARK: Entry Animation
         container.alpha = 0
-        container.transform = CGAffineTransform(translationX: 0, y: -0.25 * self.view.frame.height)
-        UIView.animate(with: .popup) {
-            self.container.transform = .identity
-            self.container.alpha = 1
-        } completion: {_ in }
     }
 }

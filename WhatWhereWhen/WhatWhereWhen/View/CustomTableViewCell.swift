@@ -15,8 +15,8 @@ class CustomTableViewCell: UITableViewCell {
     
     var nameLabel = LightLabel()
     
-    var scoreLabelTitle = SmallLabel()
-    var scoreLabel = LightLabel()
+    var scoreTitle = SmallLabel()
+    var score = LightLabel()
     
     var questionsTitle = SmallLabel()
     var questions = LightLabel()
@@ -43,12 +43,13 @@ class CustomTableViewCell: UITableViewCell {
     
     func setup() {
         let constraint = Constraints.cell.rawValue
+        self.backgroundColor = .systemGray6
         
         squareView.translatesAutoresizingMaskIntoConstraints  = false
         perсеntLabel.translatesAutoresizingMaskIntoConstraints  = false
         nameLabel.translatesAutoresizingMaskIntoConstraints  = false
-        scoreLabelTitle.translatesAutoresizingMaskIntoConstraints  = false
-        scoreLabel.translatesAutoresizingMaskIntoConstraints  = false
+        scoreTitle.translatesAutoresizingMaskIntoConstraints  = false
+        score.translatesAutoresizingMaskIntoConstraints  = false
         questionsTitle.translatesAutoresizingMaskIntoConstraints  = false
         questions.translatesAutoresizingMaskIntoConstraints  = false
         timeTitle.translatesAutoresizingMaskIntoConstraints  = false
@@ -60,8 +61,8 @@ class CustomTableViewCell: UITableViewCell {
         
         contentView.addSubview(squareView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(scoreLabelTitle)
-        contentView.addSubview(scoreLabel)
+        contentView.addSubview(scoreTitle)
+        contentView.addSubview(score)
         contentView.addSubview(questionsTitle)
         contentView.addSubview(questions)
         contentView.addSubview(timeTitle)
@@ -85,15 +86,15 @@ class CustomTableViewCell: UITableViewCell {
         nameLabel.textAlignment = .left
         nameLabel.font = UIFont.systemFont(ofSize: TextSize.light.rawValue, weight: TextWeight.title.getWeight())
 
-        scoreLabelTitle.leadingAnchor.constraint(equalTo: squareView.trailingAnchor, constant: constraint).isActive = true
-        scoreLabelTitle.centerYAnchor.constraint(equalTo: squareView.centerYAnchor).isActive = true
-        scoreLabelTitle.text = "Очки:"
-        scoreLabelTitle.textAlignment = .left
+        scoreTitle.leadingAnchor.constraint(equalTo: squareView.trailingAnchor, constant: constraint).isActive = true
+        scoreTitle.centerYAnchor.constraint(equalTo: squareView.centerYAnchor).isActive = true
+        scoreTitle.text = "Очки:"
+        scoreTitle.textAlignment = .left
         
-        scoreLabel.leadingAnchor.constraint(equalTo: scoreLabelTitle.trailingAnchor).isActive = true
-        scoreLabel.centerYAnchor.constraint(equalTo: scoreLabelTitle.centerYAnchor).isActive = true
-        scoreLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        scoreLabel.textAlignment = .right
+        score.leadingAnchor.constraint(equalTo: scoreTitle.trailingAnchor).isActive = true
+        score.centerYAnchor.constraint(equalTo: scoreTitle.centerYAnchor).isActive = true
+        score.trailingAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        score.textAlignment = .right
         
         questionsTitle.leadingAnchor.constraint(equalTo: squareView.trailingAnchor, constant: constraint).isActive = true
         questionsTitle.bottomAnchor.constraint(equalTo: squareView.bottomAnchor).isActive = true
@@ -102,11 +103,11 @@ class CustomTableViewCell: UITableViewCell {
         
         questions.leadingAnchor.constraint(equalTo: questionsTitle.trailingAnchor).isActive = true
         questions.centerYAnchor.constraint(equalTo: questionsTitle.centerYAnchor).isActive = true
-        questions.trailingAnchor.constraint(equalTo: scoreLabel.trailingAnchor).isActive = true
+        questions.trailingAnchor.constraint(equalTo: score.trailingAnchor).isActive = true
         questions.textAlignment = .right
         
-        timeTitle.leadingAnchor.constraint(equalTo: scoreLabel.trailingAnchor, constant: constraint).isActive = true
-        timeTitle.centerYAnchor.constraint(equalTo: scoreLabel.centerYAnchor).isActive = true
+        timeTitle.leadingAnchor.constraint(equalTo: score.trailingAnchor, constant: constraint).isActive = true
+        timeTitle.centerYAnchor.constraint(equalTo: score.centerYAnchor).isActive = true
         timeTitle.textAlignment = .left
         timeTitle.text = "Время:"
         
