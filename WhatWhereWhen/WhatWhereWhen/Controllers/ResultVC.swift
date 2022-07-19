@@ -15,7 +15,7 @@ class ResultVC: UIViewController {
     var maxScore: Int = 1000
     
     let titleLbl = TitleLabel()
-    let closeBtn = CloseButton()
+    let closeBtn = ImageButton()
     let resultBtn = RegularButton()
     
     let scoreTitle = RegularLabel()
@@ -82,12 +82,9 @@ extension ResultVC {
         
         let tapStart = UITapGestureRecognizer(target: self, action: #selector(resultBtnAction))
         let tapClose = UITapGestureRecognizer(target: self, action: #selector(closeBtnAction))
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
         resultBtn.addGestureRecognizer(tapStart)
         closeBtn.addGestureRecognizer(tapClose)
-        self.view.addGestureRecognizer(tap)
-        
         
         self.view.backgroundColor = .black
         self.view.frame = UIScreen.main.bounds
@@ -107,7 +104,7 @@ extension ResultVC {
         
         titleLbl.text = "Конец игры"
         
-        resultBtn.setTitle("Таблица результатов", for: .normal)
+        resultBtn.setup(title: "Таблица результатов")
         
         scoreLbl.text = "Результат: \(score) очков из \(maxScore)"
         scoreLbl.textAlignment = .left
@@ -116,6 +113,8 @@ extension ResultVC {
         
         closeBtn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -constraint).isActive = true
         closeBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
+        closeBtn.setup(image: "xmark.circle")
         container.alpha = 0
+        
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class PrepareVC: UIViewController {
     
     let titleLbl = TitleLabel()
-    let closeBtn = CloseButton()
+    let closeBtn = ImageButton()
     let startBtn = RegularButton()
     var nameTxtFld = UITextField()
     
@@ -116,8 +116,9 @@ extension PrepareVC {
         nameTxtFld.borderStyle = .roundedRect
         nameTxtFld.clearButtonMode = .whileEditing
         
-        startBtn.setTitle("Начать игру", for: .normal)
+        startBtn.setup(title: "Начать игру")
         
+        closeBtn.setup(image: "xmark.circle")
         closeBtn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -constraint).isActive = true
         closeBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
         container.alpha = 0

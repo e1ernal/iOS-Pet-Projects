@@ -12,8 +12,8 @@ class ScoreVC: UIViewController {
     
     lazy var titleLbl = TitleLabel()
     lazy var scoreTbl = UITableView(frame: .zero, style: .insetGrouped)
-    lazy var backToMain = CloseButton()
-    lazy var menuBtn = SortButton()
+    lazy var backToMain = ImageButton()
+    lazy var menuBtn = ImageButton()
     lazy var searchBar = UISearchBar()
     var headerTableView: String = "Все результаты"
     
@@ -90,11 +90,12 @@ extension ScoreVC {
         menuBtn.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
         menuBtn.menu = menu
         menuBtn.showsMenuAsPrimaryAction = true
-        menuBtn.setImage(.init(systemName: "arrow.up.arrow.down"), for: .normal)
+        menuBtn.setup(image: "arrow.up.arrow.down.circle")
         
         backToMain.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constraint).isActive = true
         backToMain.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor).isActive = true
-
+        backToMain.setup(image: "xmark.circle")
+        
         scoreTbl.backgroundColor = .black
         scoreTbl.translatesAutoresizingMaskIntoConstraints = false
         scoreTbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: constraint).isActive = true

@@ -25,62 +25,27 @@ class CustomButton: UIButton {
     }
     
     func setup() {
-        self.titleLabel?.numberOfLines = 0
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.size.height / 3.0
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.heightAnchor.constraint(equalToConstant: 1.5 * Constraints.height.rawValue).isActive = true
-        extraSetup()
     }
-    
-    func extraSetup() {}
 }
 
 class RegularButton: CustomButton {
-    override func extraSetup() {
+    func setup(title: String) {
+        self.setTitle(title, for: .normal)
+        self.heightAnchor.constraint(equalToConstant: 1.5 * Constraints.height.rawValue).isActive = true
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = .systemBlue
     }
 }
 
-class FurtherButton: CustomButton {
-    override func extraSetup() {
-        self.setTitleColor(UIColor.systemBlue, for: .normal)
-        self.backgroundColor = .systemGray6
-        self.titleLabel?.textColor = .white
-    }
-}
-
-class CloseButton: CustomButton {
-    override func extraSetup() {
+class ImageButton: CustomButton {
+    func setup(image name: String) {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        let closeImage = UIImage(systemName: "xmark.circle", withConfiguration: symbolConfiguration)
+        let closeImage = UIImage(systemName: name, withConfiguration: symbolConfiguration)
         self.setImage(closeImage, for: .normal)
-        self.imageView?.contentMode = .scaleAspectFit
-        self.heightAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
-        self.widthAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
-    }
-}
-
-class SortButton: CustomButton {
-    override func extraSetup() {
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        let closeImage = UIImage(systemName: "arrow.up.arrow.down.circle", withConfiguration: symbolConfiguration)
-        self.setImage(closeImage, for: .normal)
-        self.imageView?.contentMode = .scaleAspectFit
-        self.heightAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
-        self.widthAnchor.constraint(equalToConstant: Constraints.height.rawValue).isActive = true
-    }
-}
-
-class SettingsButton: CustomButton {
-    override func extraSetup() {
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        let closeImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)
-        self.setImage(closeImage, for: .normal)
-        self.imageView?.contentMode = .scaleAspectFit
-        self.backgroundColor = .systemBlue
-        self.tintColor = .white
+        self.imageView?.contentMode = .scaleAspectFill
         self.heightAnchor.constraint(equalToConstant: 1.5 * Constraints.height.rawValue).isActive = true
         self.widthAnchor.constraint(equalToConstant: 1.5 * Constraints.height.rawValue).isActive = true
     }

@@ -21,7 +21,7 @@ class QuestionsVC: UIViewController, Playable {
     lazy var answer1Btn = RegularButton()
     lazy var answer2Btn = RegularButton()
     lazy var answer3Btn = RegularButton()
-    lazy var getHintBtn = FurtherButton()
+    lazy var getHintBtn = RegularButton()
     lazy var pageControl = UIPageControl(frame: .zero)
     
     var questions: [Question] = []
@@ -58,7 +58,7 @@ class QuestionsVC: UIViewController, Playable {
         game.stopTimer()
         
         time = game.timePerQuestion
-        defaultColors()
+//        defaultColors()
         game.timer = Timer.scheduledTimer(timeInterval: 1,
                                                 target: self,
                                               selector: #selector(updateTimer),
@@ -75,11 +75,10 @@ class QuestionsVC: UIViewController, Playable {
         questionLbl.text = questions[game.currentQuestion].question
         questionLbl.numberOfLines = 0
         
-        answer1Btn.setTitle(answers[randAnswer[0]], for: .normal)
-        answer2Btn.setTitle(answers[randAnswer[1]], for: .normal)
-        answer3Btn.setTitle(answers[randAnswer[2]], for: .normal)
-        getHintBtn.setTitle("Использовать подсказку", for: .normal)
-        
+        answer1Btn.setup(title: answers[randAnswer[0]])
+        answer2Btn.setup(title: answers[randAnswer[1]])
+        answer3Btn.setup(title: answers[randAnswer[2]])
+        getHintBtn.setup(title: "Использовать подсказку")
     }
     
     // MARK: Array out of bounds check
@@ -197,14 +196,14 @@ extension QuestionsVC {
         getHintBtn.addTarget(self, action: #selector(getHintAction), for: .touchUpInside)
     }
     
-    func defaultColors() {
-        timerLbl.textColor = .white
-        
-        answer1Btn.extraSetup()
-        answer2Btn.extraSetup()
-        answer3Btn.extraSetup()
-        getHintBtn.extraSetup()
-    }
+//    func defaultColors() {
+//        timerLbl.textColor = .white
+//
+//        answer1Btn.extraSetup()
+//        answer2Btn.extraSetup()
+//        answer3Btn.extraSetup()
+//        getHintBtn.extraSetup()
+//    }
 }
 
 extension QuestionsVC {
